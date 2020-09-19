@@ -15,6 +15,8 @@ class ArticlesActivityViewModel : ViewModel(){
     var busy = ObservableField<Boolean>()
     var additionalFetch = ObservableField<Boolean>()
     var mutableDataList = MutableLiveData<ArrayList<DataModel>>()
+    var isMoreAvailable: Boolean= false
+    var dataList: ArrayList<DataModel> = ArrayList()
     private var articlesRemoteService: ArticlesRemoteService= ArticlesRemoteServiceImpl()
     /**
      * Called when images needs to be fetched from server
@@ -22,9 +24,11 @@ class ArticlesActivityViewModel : ViewModel(){
      * @param page page index
      * @param limit limit of data per page
      * */
-    fun fetchData(context: Context, page: Int?, limit: Int?){
-        if (page==1)
+    fun fetchData(page: Int?, limit: Int?){
+        if (page==1) {
             busy.set(true)
+            dataList= ArrayList()
+        }
         else
             additionalFetch.set(true)
         viewModelScope.launch {
@@ -41,9 +45,17 @@ class ArticlesActivityViewModel : ViewModel(){
     /**
      * On Data Receive*/
     private fun onSuccess(response: ArrayList<DataModel>) {
-        busy.set(false)
-        additionalFetch.set(false)
-        mutableDataList.value=response
+        if (response.size>0) {
+            busy.set(false)
+            additionalFetch.set(false)
+            dataList.addAll(response)
+            mutableDataList.value = dataList
+            isMoreAvailable = response.size==10
+        }else{
+            busy.set(false)
+            additionalFetch.set(false)
+            isMoreAvailable=false
+        }
     }
     /**
      * On Response Error*/
