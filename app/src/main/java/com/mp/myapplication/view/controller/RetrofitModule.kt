@@ -1,13 +1,9 @@
 package com.mp.myapplication.view.controller
 
-import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
-
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mp.myapplication.view.util.AppConstants
 import com.mp.myapplication.view.util.AppConstants.Companion.TIMEOUT
-import com.mp.myapplication.view.util.CustomGsonBuilder
+import com.mp.myapplication.view.util.CustomClass
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,7 +28,7 @@ abstract class RetrofitModule {
         @JvmStatic
         fun providesRetrofit(): Retrofit = Retrofit.Builder()
             .baseUrl(AppConstants.SERVER_VAL)
-            .addConverterFactory(GsonConverterFactory.create(CustomGsonBuilder.getInstance().create()))
+            .addConverterFactory(GsonConverterFactory.create(CustomClass.getInstance().create()))
             .client(providesOkHttpClient())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()

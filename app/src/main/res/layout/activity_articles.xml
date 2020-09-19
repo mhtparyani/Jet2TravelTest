@@ -11,12 +11,9 @@
             type="com.mp.myapplication.view.viewmodel.ArticlesActivityViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.activity.MainActivity">
-
-
         <ProgressBar
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -29,7 +26,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_marginTop="40dp"
             android:layout_height="match_parent"
             android:enabled="@{!viewModel.additionalFetch}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,11 +37,12 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            swipe:layout_constraintBottom_toBottomOf="@id/list"
-            swipe:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="10dp"
             android:visibility="@{viewModel.additionalFetch ? View.VISIBLE : View.GONE}"
-            swipe:layout_constraintStart_toStartOf="parent" />
+            swipe:layout_constraintBottom_toBottomOf="parent"
+            swipe:layout_constraintEnd_toEndOf="parent"
+            swipe:layout_constraintStart_toStartOf="parent"
+            swipe:layout_constraintTop_toBottomOf="@+id/list" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout
+>
 </layout>

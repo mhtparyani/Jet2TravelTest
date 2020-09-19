@@ -2,8 +2,11 @@ package com.mp.myapplication.view.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.AbsListView
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +15,7 @@ import com.mp.myapplication.R
 import com.mp.myapplication.databinding.ActivityArticlesBinding
 import com.mp.myapplication.view.adapter.ArticlesActivityAdapter
 import com.mp.myapplication.view.viewmodel.ArticlesActivityViewModel
-import java.util.*
+
 
 class ArticlesActivity : AppCompatActivity(), ScrollLastItem {
 
@@ -37,7 +40,11 @@ class ArticlesActivity : AppCompatActivity(), ScrollLastItem {
             this,
             R.layout.activity_articles
         )
-        binding.viewModel = viewModel
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM;
+        val inflator = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val v: View = inflator.inflate(R.layout.layout_title, null)
+        supportActionBar?.customView=v
+        binding.viewModel  = viewModel
         binding.lifecycleOwner = this
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         /** This line creates the list view which is to loaded in recycler view*/

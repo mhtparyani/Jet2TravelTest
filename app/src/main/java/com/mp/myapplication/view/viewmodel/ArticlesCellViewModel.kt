@@ -2,10 +2,12 @@ package com.mp.myapplication.view.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.github.marlonlom.utilities.timeago.TimeAgo
 import com.mp.myapplication.view.model.DataModel
 import java.text.DecimalFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+
 
 class ArticlesCellViewModel: ViewModel() {
 
@@ -46,6 +48,32 @@ class ArticlesCellViewModel: ViewModel() {
         article_content=dataModel.content
         likes=prettyCount(dataModel.likes)+" Likes"
         comments=prettyCount(dataModel.comments)+" Comments"
+        val dtStart = dataModel.createdAt
+        Log.e("data",dtStart)
+        val format =
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.mmm'Z'")
+        try {
+            val date = format.parse(dtStart)
+            val oldMillis: Long = date.getTime()
+            var text = TimeAgo.using(oldMillis)
+            if (text.contains("months"))
+                text=text.replace("months ago", "mon")
+            else if (text.contains("years"))
+                text=text.replace("years ago", "years")
+            else if (text.contains("about an year ago"))
+                text=text.replace("about an year ago", "1 yr")
+            else if (text.contains("minutes"))
+                text=text.replace("minutes ago", "min")
+            else if (text.contains("minute"))
+                text=text.replace("minute ago", "min")
+            else if (text.contains("about an hour ago"))
+                text=text.replace("about an hour ago", "1 hr")
+            else if (text.contains("hours ago"))
+                text=text.replace("hours ago", "hrs")
+            time=text
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
     }
 
     fun prettyCount(number: Int): String? {
