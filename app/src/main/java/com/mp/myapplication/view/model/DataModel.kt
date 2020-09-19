@@ -2,11 +2,13 @@ package com.mp.myapplication.view.model
 
 class DataModel {
 
-    private val id = 0
-    private val createdAt: String? = null
-    private val content:String?=null
-    private val comments = 0
-    private val likes = 0
-    private val media: ArrayList<MediaModel> = ArrayList()
-    private val user: ArrayList<UserModel> = ArrayList()
+    var id:Int = 0
+    lateinit var createdAt: String
+    lateinit var content:String
+    var comments:Int = 0
+    var likes:Int = 0
+    lateinit var media: ArrayList<MediaModel>
+    lateinit var user: ArrayList<UserModel>
+
+
 }

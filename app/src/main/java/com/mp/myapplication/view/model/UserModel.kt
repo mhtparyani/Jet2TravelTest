@@ -2,13 +2,13 @@ package com.mp.myapplication.view.model
 
 class UserModel {
 
-    private val id = 0
-    private val blogId = 0
-    private val createdAt: String? = null
-    private val name: String? = null
-    private val avatar: String? = null
-    private val lastname: String? = null
-    private val city: String? = null
-    private val designation: String? = null
-    private val about: String? = null
+    var id:Int = 0
+    var blogId:Int = 0
+    lateinit var createdAt: String
+    lateinit var name: String
+    lateinit var avatar: String
+    lateinit var lastname: String
+    lateinit var city: String
+    lateinit var designation: String
+    lateinit var about: String
 }

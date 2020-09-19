@@ -2,11 +2,11 @@ package com.mp.myapplication.view.model
 
 class MediaModel {
 
-    var id = 0
-    var blogId = 0
-    var createdAt: String? = null
-    var image: String? = null
-    var title: String? = null
-    var url: String? = null
+    var id:Int = 0
+    var blogId:Int = 0
+    lateinit var createdAt: String
+    lateinit var image: String
+    lateinit var title: String
+    lateinit var url: String
 
 }

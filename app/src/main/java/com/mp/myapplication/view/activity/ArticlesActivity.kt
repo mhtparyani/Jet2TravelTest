@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mp.myapplication.R
 import com.mp.myapplication.databinding.ActivityArticlesBinding
+import com.mp.myapplication.view.adapter.ArticlesActivityAdapter
 import com.mp.myapplication.view.viewmodel.ArticlesActivityViewModel
 
 class ArticlesActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class ArticlesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     var page: Int = 1
     private var isScrolling: Boolean = false
+    private lateinit var articlesActivityAdapter: ArticlesActivityAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /**
@@ -32,6 +34,15 @@ class ArticlesActivity : AppCompatActivity() {
         binding.list.layoutManager = layoutManager
         binding.list.setHasFixedSize(false)
         recyclerView = binding.list /** Recyclerview initializer*/
+        articlesActivityAdapter= ArticlesActivityAdapter()
+        recyclerView.adapter=articlesActivityAdapter
         viewModel.fetchData(this,1,10)
+        /**
+         *Below code observes the images from server are fetched so that images can be loaded on screen
+         * */
+        viewModel.mutableDataList.observe(this, androidx.lifecycle.Observer { items ->
+            articlesActivityAdapter.updateImageList(items)
+        })
+
     }
 }
