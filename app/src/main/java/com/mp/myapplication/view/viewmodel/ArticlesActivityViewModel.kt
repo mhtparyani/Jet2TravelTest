@@ -1,7 +1,5 @@
 package com.mp.myapplication.view.viewmodel
 
-import android.content.Context
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +12,7 @@ import kotlinx.coroutines.launch
 class ArticlesActivityViewModel : ViewModel(){
     var busy = ObservableField<Boolean>()
     var additionalFetch = ObservableField<Boolean>()
+    var error = ObservableField<Boolean>()
     var mutableDataList = MutableLiveData<ArrayList<DataModel>>()
     var isMoreAvailable: Boolean= false
     var dataList: ArrayList<DataModel> = ArrayList()
@@ -37,7 +36,7 @@ class ArticlesActivityViewModel : ViewModel(){
             if (response.isSuccessful && responseBody != null) {
                 onSuccess(responseBody)
             } else {
-                onError()
+                onError(page)
             }
         }
     }
@@ -46,6 +45,7 @@ class ArticlesActivityViewModel : ViewModel(){
      * On Data Receive*/
     private fun onSuccess(response: ArrayList<DataModel>) {
         if (response.size>0) {
+            error.set(false)
             busy.set(false)
             additionalFetch.set(false)
             dataList.addAll(response)
@@ -59,7 +59,9 @@ class ArticlesActivityViewModel : ViewModel(){
     }
     /**
      * On Response Error*/
-    private fun onError() {
+    private fun onError(page: Int?) {
+        if (page==1)
+            error.set(true)
         busy.set(false)
         additionalFetch.set(false)
     }

@@ -59,7 +59,13 @@ class ArticlesActivity : AppCompatActivity(), ScrollLastItem {
          *Below code observes the images from server are fetched so that images can be loaded on screen
          * */
         viewModel.mutableDataList.observe(this, androidx.lifecycle.Observer { items ->
-            articlesActivityAdapter.updateImageList(items)
+            if (page==1)
+                articlesActivityAdapter.updateImageList(items)
+            else {
+                var index= page;
+                index= index*10-11
+                articlesActivityAdapter.updateImageList(items, index)
+            }
         })
         /**
          * Below code line use to listen for scroll

@@ -33,6 +33,11 @@ class ArticlesActivityAdapter : RecyclerView.Adapter<ArticlesActivityAdapter.Vie
         notifyDataSetChanged()
     }
 
+    fun updateImageList(dataModelList: ArrayList<DataModel>,position: Int) {
+        this.dataModelList = dataModelList
+        notifyItemChanged(position)
+    }
+
     class ViewHolder(private  val  binding: ArticlesCellLayoutBinding): RecyclerView.ViewHolder(binding.root){
         val viewModel = ArticlesCellViewModel();
         fun bind(datamodel: DataModel) {
