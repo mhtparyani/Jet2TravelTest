@@ -44,7 +44,11 @@ class AppConstants {
         @JvmStatic
         @BindingAdapter("app:imageurl")
         fun getImage(imageView: ImageView?, url: String?) {
-            Picasso.get().load(url).placeholder(R.drawable.ic_baseline_account_circle_24).into(imageView)
+            if (url != null) {
+                if (!url.isEmpty())
+                    Picasso.get().load(url).placeholder(R.drawable.ic_baseline_account_circle_24)
+                        .into(imageView)
+            }
         }
     }
 

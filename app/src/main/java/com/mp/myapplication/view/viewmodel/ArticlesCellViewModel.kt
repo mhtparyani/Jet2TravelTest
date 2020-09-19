@@ -92,15 +92,4 @@ class ArticlesCellViewModel: ViewModel() {
             DecimalFormat("#,##0").format(numValue)
         }
     }
-    /*companion object{
-        *//**
-         * Called when any image is need to be loaded in image view using url
-         * @param imageView View
-         * @param url url of image
-         *//*
-        @BindingAdapter("app:imageUrl")
-        fun loadImage(imageView: ImageView?, url: String?) {
-            Picasso.get().load(url).into(imageView)
-        }
-    }*/
 }

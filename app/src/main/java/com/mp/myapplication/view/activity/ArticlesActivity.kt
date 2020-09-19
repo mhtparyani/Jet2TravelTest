@@ -26,11 +26,6 @@ class ArticlesActivity : AppCompatActivity(), ScrollLastItem {
     var limit: Int=10
     private var isScrolling: Boolean = false
     private lateinit var articlesActivityAdapter: ArticlesActivityAdapter
-
-    private val SECOND_MILLIS = 1000
-    private val MINUTE_MILLIS = 60 * SECOND_MILLIS
-    private val HOUR_MILLIS = 60 * MINUTE_MILLIS
-    private val DAY_MILLIS = 24 * HOUR_MILLIS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /**
